@@ -1,6 +1,7 @@
 package com.gmail.darkusagi99.androidtimechecker
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -84,6 +85,7 @@ class TimeCheckerActivity : AppCompatActivity() {
             val cal = Calendar.getInstance()
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
+            cal.set(Calendar.SECOND, 0)
 
             // extraction de la date
             when (outpoutField) {
@@ -95,8 +97,8 @@ class TimeCheckerActivity : AppCompatActivity() {
             // Recalcul des différents champs.
             val morningMinutes = (morningEndDate.time - morningStartDate.time) / 60000;
             val launchMinutes = (afternoonStartDate.time - morningEndDate.time) / 60000;
-            morningDurationField.text = "Durée matin : " + morningMinutes/60 + ":" + morningMinutes%60;
-            lunchDurationField.text = "Durée repas : " + launchMinutes/60 + ":" + launchMinutes%60;
+            morningDurationField.text = "Durée matin : %02d".format(morningMinutes/60) + ":%02d".format(morningMinutes%60);
+            lunchDurationField.text = "Durée repas : %02d".format(launchMinutes/60) + ":%02d".format(launchMinutes%60);
 
             var tempsRestant = (dureeJournee - morningMinutes).toInt();
             if (launchMinutes < 30) { tempsRestant += (30 - launchMinutes).toInt();}
