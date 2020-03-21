@@ -74,12 +74,12 @@ class TimeCheckerActivity : AppCompatActivity() {
         val afternoonEndTime = findViewById<TextView>(R.id.afternoonEndTime)
 
 
-        val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, hour, minute ->
+        val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { v, h, m ->
 
             // extraction de la date
             val cal = Calendar.getInstance()
-            cal.set(Calendar.HOUR_OF_DAY, hour)
-            cal.set(Calendar.MINUTE, minute)
+            cal.set(Calendar.HOUR_OF_DAY, h)
+            cal.set(Calendar.MINUTE, m)
             cal.set(Calendar.SECOND, 0)
 
             // extraction de la date
@@ -92,8 +92,8 @@ class TimeCheckerActivity : AppCompatActivity() {
             // Recalcul des différents champs.
             val morningMinutes = (morningEndDate.time - morningStartDate.time) / 60000
             val launchMinutes = (afternoonStartDate.time - morningEndDate.time) / 60000
-            morningDurationField.text = "Durée matin : %02d".format(morningMinutes/60) + ":%02d".format(morningMinutes%60)
-            lunchDurationField.text = "Durée repas : %02d".format(launchMinutes/60) + ":%02d".format(launchMinutes%60)
+            morningDurationField.text = getString(R.string.morningDurationText, (morningMinutes/60), (morningMinutes%60))
+            lunchDurationField.text = getString(R.string.lunchDurationText, (launchMinutes/60), (launchMinutes%60))
 
             var tempsRestant = (dureeJournee - morningMinutes).toInt()
             if (launchMinutes < 30) { tempsRestant += (30 - launchMinutes).toInt();}
@@ -101,7 +101,7 @@ class TimeCheckerActivity : AppCompatActivity() {
             calEndDay.time = afternoonStartDate
             calEndDay.add(Calendar.MINUTE, tempsRestant)
 
-            afternoonEndTime.text = "Fin de journée : " + calEndDay.get(Calendar.HOUR_OF_DAY) + ":" + calEndDay.get(Calendar.MINUTE)
+            afternoonEndTime.text = getString(R.string.afternoonEndTimeText, calEndDay.time)
 
             // Mise à jour du texte du bouton
             btnField.text = SimpleDateFormat("HH:mm").format(cal.time)
