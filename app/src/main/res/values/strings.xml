@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidTimeChecker</string>
+
+    <string name="title_activity_time_checker">TimeCheckerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
