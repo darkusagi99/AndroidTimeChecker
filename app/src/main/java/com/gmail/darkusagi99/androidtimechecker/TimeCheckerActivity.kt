@@ -1,20 +1,15 @@
 package com.gmail.darkusagi99.androidtimechecker
 
 import android.app.TimePickerDialog
-import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.text.InputType
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import kotlinx.android.synthetic.main.activity_time_checker.*
+import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
 /**
@@ -23,10 +18,10 @@ import java.util.*
  */
 class TimeCheckerActivity : AppCompatActivity() {
 
-    private var morningStartDate : Date = Calendar.getInstance().time;
-    private var morningEndDate : Date = Calendar.getInstance().time;
-    private var afternoonStartDate : Date = Calendar.getInstance().time;
-    private val dureeJournee = 480;
+    private var morningStartDate : Date = Calendar.getInstance().time
+    private var morningEndDate : Date = Calendar.getInstance().time
+    private var afternoonStartDate : Date = Calendar.getInstance().time
+    private val dureeJournee = 480
 
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
@@ -71,12 +66,12 @@ class TimeCheckerActivity : AppCompatActivity() {
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
 
-        val outpoutField = view.getTag().toString();
+        val outpoutField = view.tag.toString()
 
-        val btnField = findViewById<Button>(resources.getIdentifier(outpoutField, "id", packageName));
-        val morningDurationField = findViewById<TextView>(R.id.morningDuration);
-        val lunchDurationField = findViewById<TextView>(R.id.lunchDuration);
-        val afternoonEndTime = findViewById<TextView>(R.id.afternoonEndTime);
+        val btnField = findViewById<Button>(resources.getIdentifier(outpoutField, "id", packageName))
+        val morningDurationField = findViewById<TextView>(R.id.morningDuration)
+        val lunchDurationField = findViewById<TextView>(R.id.lunchDuration)
+        val afternoonEndTime = findViewById<TextView>(R.id.afternoonEndTime)
 
 
         val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, hour, minute ->
@@ -89,24 +84,24 @@ class TimeCheckerActivity : AppCompatActivity() {
 
             // extraction de la date
             when (outpoutField) {
-                "morningStartButton" -> morningStartDate = cal.time;
-                "morningEndButton" -> morningEndDate = cal.time;
-                else -> afternoonStartDate = cal.time;
+                "morningStartButton" -> morningStartDate = cal.time
+                "morningEndButton" -> morningEndDate = cal.time
+                else -> afternoonStartDate = cal.time
             }
 
             // Recalcul des différents champs.
-            val morningMinutes = (morningEndDate.time - morningStartDate.time) / 60000;
-            val launchMinutes = (afternoonStartDate.time - morningEndDate.time) / 60000;
-            morningDurationField.text = "Durée matin : %02d".format(morningMinutes/60) + ":%02d".format(morningMinutes%60);
-            lunchDurationField.text = "Durée repas : %02d".format(launchMinutes/60) + ":%02d".format(launchMinutes%60);
+            val morningMinutes = (morningEndDate.time - morningStartDate.time) / 60000
+            val launchMinutes = (afternoonStartDate.time - morningEndDate.time) / 60000
+            morningDurationField.text = "Durée matin : %02d".format(morningMinutes/60) + ":%02d".format(morningMinutes%60)
+            lunchDurationField.text = "Durée repas : %02d".format(launchMinutes/60) + ":%02d".format(launchMinutes%60)
 
-            var tempsRestant = (dureeJournee - morningMinutes).toInt();
+            var tempsRestant = (dureeJournee - morningMinutes).toInt()
             if (launchMinutes < 30) { tempsRestant += (30 - launchMinutes).toInt();}
-            val calEndDay = Calendar.getInstance();
-            calEndDay.time = afternoonStartDate;
-            calEndDay.add(Calendar.MINUTE, tempsRestant);
+            val calEndDay = Calendar.getInstance()
+            calEndDay.time = afternoonStartDate
+            calEndDay.add(Calendar.MINUTE, tempsRestant)
 
-            afternoonEndTime.text = "Fin de journée : " + calEndDay.get(Calendar.HOUR_OF_DAY) + ":" + calEndDay.get(Calendar.MINUTE);
+            afternoonEndTime.text = "Fin de journée : " + calEndDay.get(Calendar.HOUR_OF_DAY) + ":" + calEndDay.get(Calendar.MINUTE)
 
             // Mise à jour du texte du bouton
             btnField.text = SimpleDateFormat("HH:mm").format(cal.time)
