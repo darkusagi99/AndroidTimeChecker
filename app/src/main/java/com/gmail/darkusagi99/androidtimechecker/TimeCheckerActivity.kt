@@ -106,7 +106,7 @@ class TimeCheckerActivity : AppCompatActivity() {
             // Mise à jour du texte du bouton
             btnField.text = SimpleDateFormat("HH:mm").format(cal.time)
 
-        }),hour,minute,false)
+        }),hour,minute,true)
 
         tpd.show()
     }
