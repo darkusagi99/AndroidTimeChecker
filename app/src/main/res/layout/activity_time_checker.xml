@@ -17,46 +17,79 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
+        <TextView
             android:id="@+id/morningStartTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:text="TDOD-morningStartTime"
             android:inputType="time" />
 
-        <EditText
+        <Button
+            android:id="@+id/morningStartButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="7:00"
+            android:onClick="clickTimePicker"
+            android:tag="morningStartTime" />
+
+        <TextView
             android:id="@+id/morningEndTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:text="TDOD-morningEndTime"
             android:inputType="time" />
 
-        <EditText
+        <Button
+            android:id="@+id/morningEndButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="7:00"
+            android:onClick="clickTimePicker"
+            android:tag="morningEndTime" />
+
+        <TextView
             android:id="@+id/morningDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:text="TDOD-morningDuration"
             android:inputType="time" />
 
-        <EditText
+        <TextView
             android:id="@+id/afternoonStartTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:text="TDOD-morningStartTime"
             android:inputType="time" />
 
-        <EditText
+        <Button
+            android:id="@+id/afternoonStartButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="7:00"
+            android:onClick="clickTimePicker"
+            android:tag="afternoonStartTime" />
+
+        <TextView
             android:id="@+id/lunchDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:text="TDOD-lunchDuration"
             android:inputType="time" />
 
-        <EditText
+        <TextView
             android:id="@+id/afternoonEndTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:text="TDOD-afternoonEndTime"
             android:inputType="time" />
 
     </LinearLayout>

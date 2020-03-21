@@ -1,10 +1,19 @@
 package com.gmail.darkusagi99.androidtimechecker
 
+import android.app.TimePickerDialog
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.text.InputType
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_time_checker.*
+import java.util.*
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -46,6 +55,28 @@ class TimeCheckerActivity : AppCompatActivity() {
         mVisible = true
 
         // Set up the user interaction to manually show or hide the system UI.
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun clickTimePicker(view: View) {
+        val c = Calendar.getInstance()
+        val hour = c.get(Calendar.HOUR)
+        val minute = c.get(Calendar.MINUTE)
+
+        val outpoutField = view.getTag().toString();
+
+        val mst = findViewById<TextView>(resources.getIdentifier(outpoutField, "id", packageName));
+
+        val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, hour, minute ->
+
+            val cal = Calendar.getInstance()
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            mst.text = SimpleDateFormat("HH:mm").format(cal.time)
+
+        }),hour,minute,false)
+
+        tpd.show()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
