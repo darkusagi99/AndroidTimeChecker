@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.InputType
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +21,12 @@ import java.util.*
  * status bar and navigation/system bar) with user interaction.
  */
 class TimeCheckerActivity : AppCompatActivity() {
+
+    private var morningStartDate : Date = Calendar.getInstance().time;
+    private var morningEndDate : Date = Calendar.getInstance().time;
+    private var afternoonStartDate : Date = Calendar.getInstance().time;
+    private val dureeJournee = 480;
+
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -65,14 +72,42 @@ class TimeCheckerActivity : AppCompatActivity() {
 
         val outpoutField = view.getTag().toString();
 
-        val mst = findViewById<TextView>(resources.getIdentifier(outpoutField, "id", packageName));
+        val btnField = findViewById<Button>(resources.getIdentifier(outpoutField, "id", packageName));
+        val morningDurationField = findViewById<TextView>(R.id.morningDuration);
+        val lunchDurationField = findViewById<TextView>(R.id.lunchDuration);
+        val afternoonEndTime = findViewById<TextView>(R.id.afternoonEndTime);
+
 
         val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, hour, minute ->
 
+            // extraction de la date
             val cal = Calendar.getInstance()
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
-            mst.text = SimpleDateFormat("HH:mm").format(cal.time)
+
+            // extraction de la date
+            when (outpoutField) {
+                "morningStartButton" -> morningStartDate = cal.time;
+                "morningEndButton" -> morningEndDate = cal.time;
+                else -> afternoonStartDate = cal.time;
+            }
+
+            // Recalcul des différents champs.
+            val morningMinutes = (morningEndDate.time - morningStartDate.time) / 60000;
+            val launchMinutes = (afternoonStartDate.time - morningEndDate.time) / 60000;
+            morningDurationField.text = "Durée matin : " + morningMinutes/60 + ":" + morningMinutes%60;
+            lunchDurationField.text = "Durée repas : " + launchMinutes/60 + ":" + launchMinutes%60;
+
+            var tempsRestant = (dureeJournee - morningMinutes).toInt();
+            if (launchMinutes < 30) { tempsRestant += (30 - launchMinutes).toInt();}
+            val calEndDay = Calendar.getInstance();
+            calEndDay.time = afternoonStartDate;
+            calEndDay.add(Calendar.MINUTE, tempsRestant);
+
+            afternoonEndTime.text = "Fin de journée : " + calEndDay.get(Calendar.HOUR_OF_DAY) + ":" + calEndDay.get(Calendar.MINUTE);
+
+            // Mise à jour du texte du bouton
+            btnField.text = SimpleDateFormat("HH:mm").format(cal.time)
 
         }),hour,minute,false)
 

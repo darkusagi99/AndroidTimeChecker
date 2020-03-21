@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="TDOD-morningStartTime"
+            android:text="@string/morning_start_content"
             android:inputType="time" />
 
         <Button
@@ -32,14 +32,14 @@
             android:layout_margin="16dp"
             android:text="7:00"
             android:onClick="clickTimePicker"
-            android:tag="morningStartTime" />
+            android:tag="morningStartButton" />
 
         <TextView
             android:id="@+id/morningEndTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="TDOD-morningEndTime"
+            android:text="@string/morning_end_content"
             android:inputType="time" />
 
         <Button
@@ -49,14 +49,14 @@
             android:layout_margin="16dp"
             android:text="7:00"
             android:onClick="clickTimePicker"
-            android:tag="morningEndTime" />
+            android:tag="morningEndButton" />
 
         <TextView
             android:id="@+id/morningDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="TDOD-morningDuration"
+            android:text="--"
             android:inputType="time" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="TDOD-morningStartTime"
+            android:text="@string/afternoon_start_content"
             android:inputType="time" />
 
         <Button
@@ -74,14 +74,14 @@
             android:layout_margin="16dp"
             android:text="7:00"
             android:onClick="clickTimePicker"
-            android:tag="afternoonStartTime" />
+            android:tag="afternoonStartButton" />
 
         <TextView
             android:id="@+id/lunchDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="TDOD-lunchDuration"
+            android:text="--"
             android:inputType="time" />
 
         <TextView
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="TDOD-afternoonEndTime"
+            android:text="--"
             android:inputType="time" />
 
     </LinearLayout>
