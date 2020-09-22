@@ -67,7 +67,7 @@ class TimeCheckerActivity : AppCompatActivity() {
         val minute = c.get(Calendar.MINUTE)
 
         val outpoutField = view.tag.toString()
-        var baseText = ""
+        var baseTextId : Int
 
         val btnField = findViewById<Button>(resources.getIdentifier(outpoutField, "id", packageName))
         val morningDurationField = findViewById<TextView>(R.id.morningDuration)
@@ -87,15 +87,15 @@ class TimeCheckerActivity : AppCompatActivity() {
             when (outpoutField) {
                 "morningStartButton" -> {
                     morningStartDate = cal.time
-                    getString(R.string.morning_start_content)
+                    baseTextId = R.string.morning_start_content
                 }
                 "morningEndButton" -> {
                     morningEndDate = cal.time
-                    baseText = getString(R.string.morning_end_content)
+                    baseTextId = R.string.morning_end_content
                 }
                 else -> {
                     afternoonStartDate = cal.time
-                    getString(R.string.afternoon_start_content)
+                    baseTextId = R.string.afternoon_start_content
                 }
             }
 
@@ -114,7 +114,7 @@ class TimeCheckerActivity : AppCompatActivity() {
             afternoonEndTime.text = getString(R.string.afternoonEndTimeText, calEndDay.time)
 
             // Mise à jour du texte du bouton
-            btnField.text = baseText + SimpleDateFormat("HH:mm").format(cal.time)
+            btnField.text = getString(baseTextId, SimpleDateFormat("HH:mm").format(cal.time))
 
         }),hour,minute,true)
 

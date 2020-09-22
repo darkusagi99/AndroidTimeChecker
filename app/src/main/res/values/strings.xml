@@ -2,9 +2,12 @@
     <string name="app_name">AndroidTimeChecker</string>
 
     <string name="title_activity_time_checker">TimeChecker</string>
-    <string name="morning_start_content">Début matin : </string>
-    <string name="morning_end_content">Fin matin : </string>
-    <string name="afternoon_start_content">Début après-midi : </string>
+    <string name="morning_start_content">Début matin : %1$s</string>
+    <string name="morning_end_content">Fin matin : %1$s</string>
+    <string name="afternoon_start_content_base">Début après-midi : </string>
+    <string name="morning_start_content_base">Début matin : </string>
+    <string name="morning_end_content_base">Fin matin : </string>
+    <string name="afternoon_start_content">Début après-midi : %1$s</string>
     <string name="morningDurationText">Durée matin : %1$02d:%2$02d</string>
     <string name="lunchDurationText">Durée repas : %1$02d:%2$02d</string>
     <string name="afternoonEndTimeText">Fin de journée : %1$tH:%1$tM</string>
